@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/abcde.iml" filepath="$PROJECT_DIR$/abcde.iml" />
+      <module fileurl="file://$PROJECT_DIR$/profile.iml" filepath="$PROJECT_DIR$/profile.iml" />
       <module fileurl="file://$PROJECT_DIR$/ptcx/ptcx.iml" filepath="$PROJECT_DIR$/ptcx/ptcx.iml" />
     </modules>
   </component>

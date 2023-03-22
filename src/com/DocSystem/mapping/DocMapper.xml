@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DocSystem.dao.DocMapper">
+  <resultMap id="BaseResultMap" type="com.DocSystem.entity.Doc">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="SIZE" jdbcType="BIGINT" property="size" />
+    <result column="CHECK_SUM" jdbcType="VARCHAR" property="checkSum" />
+    <result column="REVISION" jdbcType="VARCHAR" property="revision" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="DOC_ID" jdbcType="BIGINT" property="docId" />
+    <result column="PID" jdbcType="BIGINT" property="pid" />
+    <result column="VID" jdbcType="INTEGER" property="vid" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="CREATOR" jdbcType="INTEGER" property="creator" />
+    <result column="CREATE_TIME" jdbcType="BIGINT" property="createTime" />
+    <result column="LATEST_EDITOR" jdbcType="INTEGER" property="latestEditor" />
+    <result column="LATEST_EDIT_TIME" jdbcType="BIGINT" property="latestEditTime" />
+    <result column="INTRODUCTION" jdbcType="VARCHAR" property="introduction" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.DocSystem.entity.Doc">
+    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, "TYPE", "SIZE", CHECK_SUM, REVISION, PATH, DOC_ID, PID, VID, PWD, CREATOR,
+    CREATE_TIME, LATEST_EDITOR, LATEST_EDIT_TIME,INTRODUCTION,CONTENT
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from doc
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from doc
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.DocSystem.entity.Doc">
+    insert into doc (ID, NAME, "TYPE",
+      "SIZE", CHECK_SUM, REVISION,
+      PATH, DOC_ID, PID, VID, 
+      PWD, CREATOR, CREATE_TIME, 
+      LATEST_EDITOR, LATEST_EDIT_TIME, CONTENT
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{size,jdbcType=BIGINT}, #{checkSum,jdbcType=VARCHAR}, #{revision,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{docId,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{vid,jdbcType=INTEGER}, 
+      #{pwd,jdbcType=VARCHAR}, #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
+      #{latestEditor,jdbcType=INTEGER}, #{latestEditTime,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.DocSystem.entity.Doc">
+    insert into doc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="type != null">
+        "TYPE",
+      </if>
+      <if test="size != null">
+        "SIZE",
+      </if>
+      <if test="checkSum != null">
+        CHECK_SUM,
+      </if>
+      <if test="revision != null">
+        REVISION,
+      </if>
+      <if test="path != null">
+        PATH,
+      </if>
+      <if test="docId != null">
+        DOC_ID,
+      </if>
+      <if test="pid != null">
+        PID,
+      </if>
+      <if test="vid != null">
+        VID,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="latestEditor != null">
+        LATEST_EDITOR,
+      </if>
+      <if test="latestEditTime != null">
+        LATEST_EDIT_TIME,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="checkSum != null">
+        #{checkSum,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null">
+        #{revision,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="docId != null">
+        #{docId,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="vid != null">
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestEditor != null">
+        #{latestEditor,jdbcType=INTEGER},
+      </if>
+      <if test="latestEditTime != null">
+        #{latestEditTime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.DocSystem.entity.Doc">
+    update doc
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        "TYPE" = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        "SIZE" = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="checkSum != null">
+        CHECK_SUM = #{checkSum,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null">
+        REVISION = #{revision,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="docId != null">
+        DOC_ID = #{docId,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null">
+        PID = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="vid != null">
+        VID = #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestEditor != null">
+        LATEST_EDITOR = #{latestEditor,jdbcType=INTEGER},
+      </if>
+      <if test="latestEditTime != null">
+        LATEST_EDIT_TIME = #{latestEditTime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.DocSystem.entity.Doc">
+    update doc
+    set NAME = #{name,jdbcType=VARCHAR},
+      "TYPE" = #{type,jdbcType=INTEGER},
+      "SIZE" = #{size,jdbcType=BIGINT},
+      CHECK_SUM = #{checkSum,jdbcType=VARCHAR},
+      REVISION = #{revision,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      DOC_ID = #{docId,jdbcType=BIGINT},
+      PID = #{pid,jdbcType=BIGINT},
+      VID = #{vid,jdbcType=INTEGER},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=BIGINT},
+      LATEST_EDITOR = #{latestEditor,jdbcType=INTEGER},
+      LATEST_EDIT_TIME = #{latestEditTime,jdbcType=BIGINT},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.DocSystem.entity.Doc">
+    update doc
+    set NAME = #{name,jdbcType=VARCHAR},
+      "TYPE" = #{type,jdbcType=INTEGER},
+      "SIZE" = #{size,jdbcType=BIGINT},
+      CHECK_SUM = #{checkSum,jdbcType=VARCHAR},
+      REVISION = #{revision,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      DOC_ID = #{docId,jdbcType=BIGINT},
+      PID = #{pid,jdbcType=BIGINT},
+      VID = #{vid,jdbcType=INTEGER},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=BIGINT},
+      LATEST_EDITOR = #{latestEditor,jdbcType=INTEGER},
+      LATEST_EDIT_TIME = #{latestEditTime,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectSelective" parameterType="com.DocSystem.entity.Doc" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from doc
+    where 1 = 1
+    <if test="id != null">
+        and ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+    	and NAME = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+    	and "TYPE" = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="size != null">
+        and "SIZE" = #{size,jdbcType=BIGINT}
+    </if>
+    <if test="checkSum != null">
+        and CHECK_SUM = #{checkSum,jdbcType=VARCHAR}
+    </if>
+    <if test="revision != null">
+        and REVISION = #{revision,jdbcType=VARCHAR}
+    </if>
+    <if test="path != null">
+        and PATH = #{path,jdbcType=VARCHAR}
+    </if>
+    <if test="docId != null">
+        and DOC_ID = #{docId,jdbcType=BIGINT}
+    </if>
+    <if test="pid != null">
+        and PID = #{pid,jdbcType=BIGINT}
+    </if>
+    <if test="vid != null">
+        and VID = #{vid,jdbcType=INTEGER}
+    </if>
+	<if test="creator != null">
+		and CREATOR = #{creator,jdbcType=INTEGER}
+	</if>
+	<if test="createTime != null">
+		and CREATE_TIME = #{createTime,jdbcType=BIGINT}
+	</if>
+	<if test="latestEditor != null">
+		and LATEST_EDITOR = #{latestEditor,jdbcType=INTEGER}
+	</if>
+	<if test="latestEditTime != null">
+		and LATEST_EDIT_TIME = #{latestEditTime,jdbcType=BIGINT}
+	</if>
+    <if test="pwd != null">
+        and PWD = #{pwd,jdbcType=VARCHAR}
+    </if>
+    order by type desc,name asc
+  </select>
+ 
+  <delete id="deleteSelective" parameterType="com.DocSystem.entity.Doc" >
+    delete from doc
+    where 1 = 1
+    <if test="id != null">
+        and ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+    	and NAME = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+    	and "TYPE" = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="size != null">
+        and "SIZE" = #{size,jdbcType=BIGINT}
+    </if>
+    <if test="checkSum != null">
+        and CHECK_SUM = #{checkSum,jdbcType=VARCHAR}
+    </if>
+    <if test="revision != null">
+        and REVISION = #{revision,jdbcType=VARCHAR}
+    </if>
+    <if test="path != null">
+        and PATH = #{path,jdbcType=VARCHAR}
+    </if>
+    <if test="docId != null">
+        and DOC_ID = #{docId,jdbcType=BIGINT}
+    </if>
+    <if test="pid != null">
+        and PID = #{pid,jdbcType=BIGINT}
+    </if>
+    <if test="vid != null">
+        and VID = #{vid,jdbcType=INTEGER}
+    </if>
+	<if test="creator != null">
+		and CREATOR = #{creator,jdbcType=INTEGER}
+	</if>
+	<if test="createTime != null">
+		and CREATE_TIME = #{createTime,jdbcType=BIGINT}
+	</if>
+	<if test="latestEditor != null">
+		and LATEST_EDITOR = #{latestEditor,jdbcType=INTEGER}
+	</if>
+	<if test="latestEditTime != null">
+		and LATEST_EDIT_TIME = #{latestEditTime,jdbcType=BIGINT}
+	</if>
+    <if test="pwd != null">
+        and PWD = #{pwd,jdbcType=VARCHAR}
+    </if>
+  </delete>
+  
+  <select id="queryDocList" parameterType="HashMap" resultMap="BaseResultMap">
+	select 
+    <include refid="Base_Column_List" />
+    from doc
+	where 1 = 1 
+	<if test="name!=null and name!=&quot;&quot;">
+		and (
+			NAME like '%${name}%'
+			<if test="ids!=null and ids!=&quot;&quot;">
+				or DOC_ID in (${ids})
+			 </if>
+			)
+	</if>
+	<if test="reposId!=null and reposId!=&quot;&quot;">
+		and VID = #{reposId}
+	</if>
+	<if test="pDocId!=null and pDocId!=&quot;&quot;">
+		and PID = #{pDocId}
+	</if>
+  </select>
+  <select id="docData" parameterType="HashMap" resultMap="BaseResultMap">
+	  select a.*,b.name as key_words from doc a left join repos b on a.vid = b.id where a.size >0 
+	  and check_sum != ""
+	  <if test="name!=null and name!=&quot;&quot;">
+	  and a.NAME like '%${name}%'
+      </if>
+      order by a.latest_edit_time desc
+	  limit ${pageNumbers},10
+  </select>
+  <select id="docDataCount" resultType="java.lang.Integer">
+	  select count(a.id) from doc a left join repos b on a.vid = b.id where a.size >0 
+	  and check_sum != ""	 
+	  <if test="name!=null and name!=&quot;&quot;">
+	  and a.NAME like '%${name}%'
+      </if> 
+  </select>
+  <select id="reposData" resultMap="BaseResultMap">
+  select * from repos
+  </select>
+  <update id="updateContentByDocId" parameterType="hashMap">
+  update doc set content = #{content} where doc_id = #{docId}
+  </update>
+</mapper>
