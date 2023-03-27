@@ -14,8 +14,6 @@ public class Testa {
             Class<?>[] interfaces = aClass.getInterfaces();
             if(interfaces.length!=0){
                 System.out.println("有接口,使用动态代理");
-
-
                 ClassLoader a=aClass.getClassLoader();
 
                 Class<?>[] b=aClass.getInterfaces();
